@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Assistant } from "./assistants/googleai.js";
+import { Assistant } from "./assistants/openai.js";
 import styles from "./App.module.css";
 import { Chat } from "../src/components/Chat/Chat.jsx";
 import { Controls } from "./components/Controls/Controls.jsx";
@@ -15,7 +15,7 @@ function App() {
   async function handleContentSend(content) {
     addMessage({ content, role: "user" });
     try {
-      const result = await assistant.chat(content)
+      const result = await assistant.chat(content, messages)
       addMessage({ content: result, role: "assistant" })
     } catch (error) {
       addMessage({
