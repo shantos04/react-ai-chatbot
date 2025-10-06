@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import styles from "./Controls.module.css";
 
@@ -8,9 +8,9 @@ export function Controls({ isDisabled = false, onSend }) {
 
     useEffect(() => {
         if (!isDisabled) {
-            textareaRef.current.focus()
+            textareaRef.current.focus();
         }
-    }, [isDisabled])
+    }, [isDisabled]);
 
     function handleContentChange(event) {
         setContent(event.target.value);
@@ -18,15 +18,15 @@ export function Controls({ isDisabled = false, onSend }) {
 
     function handleContentSend() {
         if (content.length > 0) {
-            onSend(content)
-            setContent("")
+            onSend(content);
+            setContent("");
         }
     }
 
     function handleEnterPress(event) {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault()
-            handleContentSend()
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            handleContentSend();
         }
     }
 
@@ -45,11 +45,15 @@ export function Controls({ isDisabled = false, onSend }) {
                     onKeyDown={handleEnterPress}
                 />
             </div>
-            <button className={styles.Button} disable={isDisabled} onClick={handleContentSend}>
+            <button
+                className={styles.Button}
+                disabled={isDisabled}
+                onClick={handleContentSend}
+            >
                 <SendIcon />
             </button>
         </div>
-    )
+    );
 }
 
 function SendIcon() {
@@ -63,5 +67,5 @@ function SendIcon() {
         >
             <path d="M120-160v-240l320-80-320-80v-240l760 320-760 320Z" />
         </svg>
-    )
+    );
 }
