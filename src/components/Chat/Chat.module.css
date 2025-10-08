@@ -23,6 +23,10 @@
     border-radius: 16px;
     font-size: 14px;
 
+    &[data-role="system"] {
+        background: #f9dbdb;
+    }
+
     &[data-role="user"] {
         align-self: flex-end;
         background: #f3f3f3;

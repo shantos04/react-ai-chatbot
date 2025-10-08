@@ -14,7 +14,7 @@ export class Assistant {
             const result = await this.#chat.sendMessage({ message: content });
             return result.text;
         } catch (error) {
-            throw error;
+            throw this.#parseError(error);
         }
     }
 
@@ -26,7 +26,20 @@ export class Assistant {
                 yield chunk.text;
             }
         } catch (error) {
-            throw error;
+            throw this.#parseError(error);
+        }
+    }
+
+    #parseError(error) {
+        try {
+            const [, outerErrorJSON] = error?.message.split(" . ");
+            const outerErrorObject = JSON.parse(outerErrorJSON);
+
+            const innerErrorObject = JSON.parse(outerErrorObject?.error?.message);
+
+            return innerErrorObject?.error;
+        } catch (parseError) {
+            return error;
         }
     }
 }

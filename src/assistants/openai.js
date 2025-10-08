@@ -39,7 +39,11 @@ export class Assistant {
                 yield chunk.choices[0]?.delta?.content || ""
             }
         } catch (error) {
-            throw error;
+            throw this.#parseError(error);
         }
+    }
+
+    #parseError(error) {
+        return error
     }
 }
